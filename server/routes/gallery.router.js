@@ -15,20 +15,28 @@ router.get('/', (req, res) => {
   })
 });
 
+router.put('/like/:id', (req, res) => {
+    let likesId = req.params.id 
+    let likes = req.body.likes 
 
+    let queryText = `
+     UPDATE "gallery" SET "likes"= "likes" + 1
+     WHERE "id"= $1;`
 
-router.post('/', (req, res) => {
-  const liked = req.body;
-  const sqlText = `INSERT INTO food ("likes")
-                   VALUES ($1,)`;
-  pool.query(sqlText, [liked.like,])
-      .then((result) => {
-          res.sendStatus(201);
-      })
-      .catch((error) => {
-          console.log(`Error making database query ${sqlText}`, error);
-          res.sendStatus(500); // Good server always responds
-      })
+    
+    pool.query(queryText, [likesId])
+        .then((result) => {
+            res.sendStatus(204)
+        })
+        .catch((err) => {
+            console.log(`Error making query.. '${queryText}'`, err)
+            res.sendStatus(500)
+        })
 })
+
+
+  
+
+
 
 module.exports = router;
