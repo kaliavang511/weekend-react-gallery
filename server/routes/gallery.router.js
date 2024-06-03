@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 
 router.put('/like/:id', (req, res) => {
-
+    const itemId = req.params.id;
     let queryText =  `
         UPDATE "gallery" SET "likes"= "likes" + 1
          WHERE "id"= $1;
