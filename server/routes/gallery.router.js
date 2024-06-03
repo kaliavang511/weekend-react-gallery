@@ -15,16 +15,16 @@ router.get('/', (req, res) => {
   })
 });
 
+
 router.put('/like/:id', (req, res) => {
-    let likesId = req.params.id 
-    let likes = req.body.likes 
 
-    let queryText = `
-     UPDATE "gallery" SET "likes"= "likes" + 1
-     WHERE "id"= $1;`
-
+    let queryText =  `
+        UPDATE "gallery" SET "likes"= "likes" + 1
+         WHERE "id"= $1;
+        `
     
-    pool.query(queryText, [likesId])
+
+    pool.query(queryText, [itemId])
         .then((result) => {
             res.sendStatus(204)
         })
@@ -33,9 +33,6 @@ router.put('/like/:id', (req, res) => {
             res.sendStatus(500)
         })
 })
-
-
-  
 
 
 

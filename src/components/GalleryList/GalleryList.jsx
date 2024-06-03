@@ -18,7 +18,7 @@ const fetchGalleryItems = () =>{
         url: '/api/gallery'
       })
         .then((response) => {
-          console.log('response.data is:', response.data);
+          // console.log('response.data is:', response.data);
   
         
           setGalleryItem(response.data);
